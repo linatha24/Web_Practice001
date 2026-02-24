@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div>00:00:00</div>
+        <div class="button">
+            <div class="box box1">Start</div>
+            <div class="box box2">Stop</div>
+            <div class="box box3">Reset</div>
+        </div>
+    </div>
+    <script>
+        let timer = null;
+        let seconds = 0;
+
+        const display = document.querySelector('.container div');
+
+        document.querySelector('.box1').addEventListener('click', function () {
+            if (timer) return;
+            timer = setInterval(function () {
+                seconds++;
+                display.textContent = new Date(seconds * 1000).toISOString().slice(11, 19);
+            }, 1000);
+        });
+
+        document.querySelector('.box2').addEventListener('click', function () {
+            clearInterval(timer);
+            timer = null;
+        });
+
+        document.querySelector('.box3').addEventListener('click', function () {
+            clearInterval(timer);
+            timer = null;
+            seconds = 0;
+            display.textContent = '00:00:00';
+        });
+    </script>
+</body>
+</html>
